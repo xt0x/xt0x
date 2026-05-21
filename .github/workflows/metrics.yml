@@ -1,0 +1,48 @@
+name: Metrics
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "metrics/**"
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: metrics
+  cancel-in-progress: true
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Half-year calendar
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics/metrics.plugin.isocalendar.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_message: "chore(metrics): update isometric commit calendar"
+          base: ""
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: half-year
+
+      - name: Most used languages
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics/metrics.plugin.languages.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_message: "chore(metrics): update languages activity"
+          base: ""
+          plugin_languages: yes
+          plugin_languages_analysis_timeout: 15
+          plugin_languages_analysis_timeout_repositories: 7.5
+          plugin_languages_categories: markup, programming
+          plugin_languages_colors: github
+          plugin_languages_limit: 8
+          plugin_languages_sections: most-used
+          plugin_languages_threshold: 0%
