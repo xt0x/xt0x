@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Half-year calendar
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # latest
         with:
           filename: metrics/metrics.plugin.isocalendar.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -32,7 +32,7 @@ jobs:
           plugin_isocalendar_duration: half-year
 
       - name: Most used languages
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # latest
         with:
           filename: metrics/metrics.plugin.languages.svg
           token: ${{ secrets.METRICS_TOKEN }}
